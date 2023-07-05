@@ -1,0 +1,14 @@
+.husky/
+dist/
+docs/
+node_modules/
+dist-electron/
+_*
+*.png
+*.svg
+.gitignore
+.npmrc
+.prettierignore
+browserslist
+LICENSE
+package*.json
