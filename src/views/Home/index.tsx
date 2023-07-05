@@ -1,19 +1,12 @@
 import { Layout } from 'antd'
-const { Sider, Content } = Layout
+import { Sidebar } from '../Sidebar'
+import { ContentPage } from '../ContentPage'
+
 export const Home = () => {
   return (
     <Layout>
-      <Sider style={{height: '100vh', padding: '25px' }}>Sider</Sider>
-      <Layout>
-        <Content
-          style={{
-            height: '100vh',
-            padding: '25px',
-          }}
-        >
-          Content
-        </Content>
-      </Layout>
+      <Sidebar />
+      <ContentPage />
     </Layout>
   )
 }
