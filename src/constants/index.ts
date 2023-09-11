@@ -4,7 +4,7 @@ export const DefaultPortConfigEnum: IPortConfig = {
   path: '',
   baudRate: 9600,
   parity: 'none',
-  stopBits: 8,
-  dataBits: 1,
+  stopBits: 1,
+  dataBits: 8,
   isOpen: false,
 }
