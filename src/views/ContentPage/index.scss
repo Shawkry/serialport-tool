@@ -1,0 +1,32 @@
+.readTextArea {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 25px;
+  .title {
+    display: flex;
+    flex-direction: revert;
+    margin-bottom: 10px;
+    .text {
+      flex: 1;
+      font-size: 20px;
+    }
+    .btn {
+    }
+  }
+}
+.writeTextArea {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 25px;
+  .title {
+    display: flex;
+    flex-direction: revert;
+    margin-bottom: 10px;
+    .text {
+      flex: 1;
+      font-size: 20px;
+    }
+    .btn {
+    }
+  }
+}

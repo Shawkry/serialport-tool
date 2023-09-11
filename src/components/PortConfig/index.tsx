@@ -6,25 +6,22 @@ import { DefaultPortConfigEnum } from '@/constants'
 import { ipcRenderer } from 'electron'
 export const PortConfig = () => {
   const [form] = Form.useForm<IPortConfig>()
-  const [portListOptions, setPortListOptions] = useState()
+  const [portListOptions, setPortListOptions] = useState<{ label: string; value: string }[]>()
   const pathValue = Form.useWatch('path', form)
   const canEdit = useMemo(() => {
     return Boolean(pathValue) && pathValue !== ''
   }, [pathValue])
   const getPortOptions = () => {
-    ipcRenderer.send('getSerialPortList')
-    ipcRenderer.on('serialPortsList', (_event, data) => {
-      console.log(data)
+    ipcRenderer.send('serialPort/getList')
+    ipcRenderer.on('serialPort/getList/data', (_event, data) => {
       setPortListOptions(data)
     })
   }
 
-  const handlePortConf = async (value: IPortConfig) => {
-    console.log(value)
-    if (value?.path && value.path !== '') await form.setFieldValue('isOpen', true)
+  const handlePortConf = async () => {
     const portConfig = await form.validateFields()
-    console.log(portConfig)
-    ipcRenderer.send('setSerialPort', JSON.stringify(portConfig))
+    portConfig.path = portListOptions!.find((item) => item.value === portConfig.path)!.label
+    ipcRenderer.send('serialPort/setConf', JSON.stringify(portConfig))
   }
   useEffect(() => {
     getPortOptions()
@@ -56,7 +53,7 @@ export const PortConfig = () => {
         <Form.Item label="校验位：" name="parity">
           <Select disabled={!canEdit} />
         </Form.Item>
-        <Form.Item label="状态：" name="isOpen">
+        <Form.Item label="状态：" name="isOpen" valuePropName="checked">
           <Switch checkedChildren="开" unCheckedChildren="关" disabled={!canEdit} />
         </Form.Item>
       </Form>
